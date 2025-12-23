@@ -1,0 +1,99 @@
+---
+alwaysApply: true
+---
+Day 1. Scaffold and routes
+Tasks
+
+Next.js App Router + TS + Tailwind.
+
+Add /, /projects, /projects/[slug], /about.
+
+Add minimal layout, nav, footer.
+
+Add repo structure and docs folder.
+Checks
+
+All routes load.
+
+No console errors.
+Commit
+
+Init app, routes, layout
+
+Day 2. Content engine
+Tasks
+
+Add Zod schema for Project.
+
+Add MDX loader from /content/projects.
+
+Add sorting: order then dateStart desc.
+
+Add 404 for missing slug.
+Checks
+
+Invalid frontmatter fails build with clear error.
+
+Project lookup by slug works.
+Commit
+
+Add MDX content loader and validation
+
+Day 3. UI for archive
+Tasks
+
+ProjectCard and ProjectGrid.
+
+Home renders project grid.
+
+/projects renders list view.
+
+Project page renders metadata and cover.
+Checks
+
+Mobile and desktop layouts hold.
+
+Images render with next/image.
+Commit
+
+Render project grid and project pages
+
+Day 4. Blocks and zine layouts
+Tasks
+
+Add MDX components: ImageBlock, TextBlock, Divider.
+
+Add layouts: full, bleed, inset, twoUp.
+
+Add BlockRenderer.
+Checks
+
+Mixed block sample renders.
+
+Captions attach to correct image.
+Commit
+
+Add block system and zine layouts
+
+Day 5. GitHub images and Vercel deploy
+Tasks
+
+Create assets repo path plan and naming rules in /docs/assets.md.
+
+Update next.config for raw.githubusercontent.com remote images.
+
+Add per page metadata, OG tags, sitemap, robots.
+
+Deploy on Vercel from GitHub repo.
+
+Add one real project with real image URLs.
+Checks
+
+Vercel build passes.
+
+Project images load on production URL.
+
+Share preview works for a project page.
+Commit
+
+V0.1 deploy and first project live

@@ -1,0 +1,197 @@
+---
+alwaysApply: true
+---
+Photo Archive Site V0.1. Vercel deploy. Images hosted on GitHub.
+
+PROJECT INTENT
+
+Publish photography as projects or series.
+
+Show large images with short captions.
+
+Support optional short text blocks inside a project.
+
+Deploy on Vercel from a GitHub repo.
+
+Keep updates Git driven.
+
+NON GOALS V0.1
+
+No print sales, cart, payments, shipping.
+
+No accounts, comments, or user uploads.
+
+No global search.
+
+STACK
+
+Next.js App Router.
+
+TypeScript.
+
+Tailwind CSS. with shadcd/ui for styling and components.
+
+MDX for project content.
+
+Zod for content validation.
+
+RENDERING STRATEGY
+
+Static pages generated at build time.
+
+No database.
+
+Content loaded from local MDX files in repo.
+
+ROUTES
+
+/ home project grid
+
+/projects list view
+
+/projects/[slug] project detail
+
+/about minimal bio and contact
+
+CONTENT MODEL
+Project frontmatter fields
+
+slug string, required, unique
+
+title string, required
+
+oneLine string, required
+
+dateStart ISO date string, required
+
+dateEnd ISO date string, optional
+
+location string, optional
+
+coverImageUrl string, required
+
+order number, optional
+
+MDX body uses block components.
+
+Block types
+
+ImageBlock
+
+url string, required
+
+alt string, required
+
+caption string, optional
+
+layout enum required: full, bleed, inset, twoUp
+
+TextBlock
+
+style enum required: note, paragraph
+
+children required
+
+Divider
+
+style enum required: blank, rule
+
+GITHUB IMAGE HOSTING RULES
+
+Store images in a GitHub repo dedicated to assets, or in the same repo under /assets.
+
+Reference images via raw.githubusercontent.com URLs.
+
+Configure next.config to allow remote images from raw.githubusercontent.com.
+
+Keep URLs stable. Never rename files after publishing.
+
+File naming
+
+YYYY-MM-projectSlug-roll-frame-description.jpg
+
+IMAGE DISPLAY RULES
+
+Use next/image for all photos.
+
+Always provide alt text.
+
+Use figure and figcaption for captions.
+
+Use responsive sizing and lazy loading below fold.
+
+DESIGN RULES
+
+Minimal UI but taking full advantage of shadcd/ui for a modern clean look.
+
+Strong whitespace.
+
+High contrast.
+
+Captions stay small and consistent.
+
+Avoid heavy animation and heavy client JS.
+
+ACCESSIBILITY RULES
+
+Keyboard navigation works across nav, cards, links.
+
+Visible focus states.
+
+Alt text required for every image block.
+
+Semantic markup for figures and headings.
+
+SEO RULES
+
+Unique title and description per project.
+
+Open Graph tags per page.
+
+Sitemap and robots.txt.
+
+CODE QUALITY
+
+No any.
+
+Keep components small and composable.
+
+Put schema in /lib/schema.ts.
+
+Build fails on schema errors with filename and field name.
+
+Prefer server components, limit client components.
+
+WHAT TO DO WHEN USER REQUESTS A CHANGE
+
+Restate target page or feature in one sentence.
+
+List files you will edit.
+
+Implement smallest change that meets request.
+
+Keep V0.1 scope intact unless user expands scope.
+
+WHAT TO AVOID
+
+Adding a CMS in V0.1.
+
+Adding ecommerce hooks.
+
+Adding a database.
+
+Adding a lightbox unless asked for V0.2.
+
+TIGHT SCHEDULE. 5 DAY SPRINT. CURSOR FIRST
+
+Daily loop
+
+Write /docs/TASK.md with a 5 to 10 line brief.
+
+Paste brief into Cursor Chat.
+
+Ask for file list first, then implementation.
+
+Review diffs, run dev, fix.
+
+End with one commit.
