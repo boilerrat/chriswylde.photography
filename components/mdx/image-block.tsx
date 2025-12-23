@@ -1,20 +1,29 @@
+"use client";
+
 import Image from "next/image";
 import { cn } from "@/lib/utils";
+import { useMDX } from "@/contexts/mdx-context";
+import { BuyPrintButton } from "@/components/buy-print-button";
 
 interface ImageBlockProps {
   url: string;
   alt: string;
   caption?: string;
   layout: "full" | "bleed" | "inset" | "twoUp";
+  printProductId?: string;
 }
 
-export function ImageBlock({ url, alt, caption, layout }: ImageBlockProps) {
+export function ImageBlock({ url, alt, caption, layout, printProductId }: ImageBlockProps) {
+  const { printProduct } = useMDX();
   const layoutClasses = {
     full: "w-full",
     bleed: "w-full -mx-4 md:-mx-8 lg:-mx-16",
     inset: "w-full max-w-2xl mx-auto",
     twoUp: "w-full md:w-1/2",
   };
+
+  // Use printProductId if provided, otherwise use project's printProduct
+  const productToShow = printProduct || null;
 
   return (
     <figure className={cn("my-8", layoutClasses[layout])}>
@@ -37,6 +46,11 @@ export function ImageBlock({ url, alt, caption, layout }: ImageBlockProps) {
         <figcaption className="mt-2 text-sm text-slate-600 text-center">
           {caption}
         </figcaption>
+      )}
+      {productToShow && (
+        <div className="mt-4">
+          <BuyPrintButton printProduct={productToShow} imageAlt={alt} />
+        </div>
       )}
     </figure>
   );

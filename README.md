@@ -12,6 +12,7 @@ A minimal, Git-driven photography archive site built with Next.js. Publish photo
 - 🔍 **SEO optimized** - Open Graph tags, sitemap, and robots.txt
 - ♿ **Accessible** - Keyboard navigation, focus states, semantic HTML
 - 🎯 **Type-safe** - Full TypeScript with Zod validation
+- 🛒 **Ecommerce ready** - Sell prints via Shopify integration with cart and checkout
 
 ## Tech Stack
 
@@ -181,6 +182,7 @@ Shot on 35mm film during golden hour.
 - `dateEnd` - ISO date string for date ranges
 - `location` - Location string
 - `order` - Number for custom sorting (lower numbers appear first)
+- `printProduct` - Shopify product configuration for selling prints (see [Shopify Setup](./docs/SHOPIFY_SETUP.md))
 
 ### Step 4: Available MDX Blocks
 
@@ -223,6 +225,16 @@ See [docs/assets.md](./docs/assets.md) for detailed image hosting instructions, 
 - URL formats
 - Image optimization guidelines
 - Workflow best practices
+
+## Ecommerce Setup (Shopify)
+
+See [docs/SHOPIFY_SETUP.md](./docs/SHOPIFY_SETUP.md) for complete Shopify integration instructions, including:
+
+- Setting up Shopify Storefront API
+- Configuring products and variants
+- Adding print products to projects
+- Cart and checkout flow
+- Fulfillment setup with Graination
 
 ## Development
 
@@ -273,6 +285,8 @@ Invalid frontmatter in project-name.mdx: slug: Required, coverImageUrl: Invalid 
 
 3. **Set Environment Variables**
    - `NEXT_PUBLIC_SITE_URL` - Your site URL (e.g., `https://chriswylde.photography`)
+   - `NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN` - Your Shopify store domain (e.g., `your-store.myshopify.com`)
+   - `NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN` - Shopify Storefront API access token (see [Shopify Setup](./docs/SHOPIFY_SETUP.md))
 
 4. **Add Custom Domain**
    - In Vercel: Go to Settings → Domains

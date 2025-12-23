@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CartIcon } from "@/components/cart-icon";
 
 export function Nav() {
   const links = [
@@ -17,18 +18,21 @@ export function Nav() {
           >
             Chris Wylde
           </Link>
-          <ul className="flex gap-6">
-            {links.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm font-medium hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 rounded transition-colors"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <div className="flex items-center gap-6">
+            <ul className="flex gap-6">
+              {links.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm font-medium hover:text-slate-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900 rounded transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            <CartIcon />
+          </div>
         </div>
       </div>
     </nav>

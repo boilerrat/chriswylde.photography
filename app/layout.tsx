@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
+import { CartProvider } from "@/contexts/cart-context";
 
 export const metadata: Metadata = {
   title: "Chris Wylde Photography",
@@ -16,9 +17,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="min-h-screen flex flex-col">
-        <Nav />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CartProvider>
+          <Nav />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </CartProvider>
       </body>
     </html>
   );

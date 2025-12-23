@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { MDXRemote } from "next-mdx-remote/rsc";
 import { getProjectBySlug, getProjectContent } from "@/lib/projects";
-import { mdxComponents } from "@/components/mdx";
+import { MDXWrapper } from "@/components/mdx-wrapper";
 
 export async function generateMetadata({
   params,
@@ -92,7 +91,7 @@ export default async function ProjectPage({
 
       {mdxContent && (
         <article className="prose prose-slate max-w-none">
-          <MDXRemote source={mdxContent} components={mdxComponents} />
+          <MDXWrapper content={mdxContent} printProduct={project.printProduct || null} />
         </article>
       )}
     </div>
