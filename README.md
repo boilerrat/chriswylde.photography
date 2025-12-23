@@ -274,7 +274,31 @@ Invalid frontmatter in project-name.mdx: slug: Required, coverImageUrl: Invalid 
 3. **Set Environment Variables**
    - `NEXT_PUBLIC_SITE_URL` - Your site URL (e.g., `https://chriswylde.photography`)
 
-4. **Deploy**
+4. **Add Custom Domain**
+   - In Vercel: Go to Settings → Domains
+   - Add your domain: `chriswylde.photography`
+   - Add www subdomain: `www.chriswylde.photography` (optional)
+   - Vercel will show DNS records to configure
+
+5. **Configure DNS in Namecheap**
+   - Log into Namecheap → Domain List → Manage
+   - Go to Advanced DNS tab
+   - Add A Record:
+     - Host: `@`
+     - Value: `76.76.21.21` (Vercel's IP)
+     - TTL: Automatic
+   - Add CNAME Record (for www):
+     - Host: `www`
+     - Value: `cname.vercel-dns.com`
+     - TTL: Automatic
+   - Save changes
+
+6. **Wait for DNS Propagation**
+   - Usually takes 5-30 minutes, can take up to 48 hours
+   - Check status in Vercel's Domains section
+   - When it shows "Valid Configuration", your domain is ready
+
+7. **Deploy**
    - Click "Deploy"
    - Vercel will build and deploy automatically
    - Future pushes to main will trigger automatic deployments
