@@ -14,10 +14,17 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import type { PrintProduct, PrintSize } from "@/lib/schema";
+import type { PrintProduct } from "@/lib/schema";
+
+interface PrintSize {
+  name: string;
+  shopifyVariantId: string;
+  price: number;
+  dimensions?: string;
+}
 
 interface BuyPrintButtonProps {
-  printProduct: PrintProduct;
+  printProduct: PrintProduct & { sizes: PrintSize[] };
   imageAlt: string;
 }
 

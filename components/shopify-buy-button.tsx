@@ -2,6 +2,12 @@
 
 import { useEffect, useRef } from "react";
 
+declare global {
+  interface Window {
+    ShopifyBuy?: any;
+  }
+}
+
 interface ShopifyBuyButtonProps {
   buyButtonCode: string;
 }
