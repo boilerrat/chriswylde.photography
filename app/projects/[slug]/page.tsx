@@ -64,15 +64,17 @@ export default async function ProjectPage({
       <h1 className="text-4xl font-bold mb-2">{project.title}</h1>
       <p className="text-lg text-slate-600 mb-8">{project.oneLine}</p>
 
-      <div className="aspect-[4/3] relative mb-8 overflow-hidden bg-slate-100 rounded-lg">
-        <Image
-          src={project.coverImageUrl}
-          alt={project.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 100vw, 896px"
-          priority
-        />
+      <div className="mb-8">
+        <div className="aspect-[4/3] relative overflow-hidden bg-slate-100 rounded-lg">
+          <Image
+            src={project.coverImageUrl}
+            alt={project.title}
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 896px"
+            priority
+          />
+        </div>
       </div>
 
       <div className="space-y-2 text-sm text-slate-600 mb-12">

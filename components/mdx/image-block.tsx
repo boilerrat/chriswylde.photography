@@ -3,17 +3,18 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { useMDX } from "@/contexts/mdx-context";
-import { BuyPrintButton } from "@/components/buy-print-button";
+import { ShopifyBuyButton } from "@/components/shopify-buy-button";
 
 interface ImageBlockProps {
   url: string;
   alt: string;
   caption?: string;
   layout: "full" | "bleed" | "inset" | "twoUp";
-  printProductId?: string;
+  showBuyButton?: boolean;
+  buyButtonCode?: string;
 }
 
-export function ImageBlock({ url, alt, caption, layout, printProductId }: ImageBlockProps) {
+export function ImageBlock({ url, alt, caption, layout, showBuyButton, buyButtonCode: propBuyButtonCode }: ImageBlockProps) {
   const { printProduct } = useMDX();
   const layoutClasses = {
     full: "w-full",
@@ -22,8 +23,11 @@ export function ImageBlock({ url, alt, caption, layout, printProductId }: ImageB
     twoUp: "w-full md:w-1/2",
   };
 
-  // Use printProductId if provided, otherwise use project's printProduct
-  const productToShow = printProduct || null;
+  // Use prop buyButtonCode if provided, otherwise fall back to context
+  const buyButtonCode = propBuyButtonCode || printProduct?.buyButtonCode;
+  
+  // Only show buy button if explicitly enabled for this image and we have a buyButtonCode
+  const shouldShowBuyButton = showBuyButton && buyButtonCode;
 
   return (
     <figure className={cn("my-8", layoutClasses[layout])}>
@@ -47,9 +51,9 @@ export function ImageBlock({ url, alt, caption, layout, printProductId }: ImageB
           {caption}
         </figcaption>
       )}
-      {productToShow && (
-        <div className="mt-4">
-          <BuyPrintButton printProduct={productToShow} imageAlt={alt} />
+      {shouldShowBuyButton && buyButtonCode && (
+        <div className="flex justify-center">
+          <ShopifyBuyButton buyButtonCode={buyButtonCode} />
         </div>
       )}
     </figure>

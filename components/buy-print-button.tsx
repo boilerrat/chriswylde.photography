@@ -22,18 +22,17 @@ interface BuyPrintButtonProps {
 }
 
 export function BuyPrintButton({ printProduct, imageAlt }: BuyPrintButtonProps) {
-  const [open, setOpen] = useState(false);
-  const [selectedSize, setSelectedSize] = useState<PrintSize | null>(printProduct.sizes[0] || null);
   const [isAdding, setIsAdding] = useState(false);
   const { addItem } = useCart();
+  
+  // If only one size/variant, skip the dialog and add directly
+  const isSingleVariant = printProduct.sizes.length === 1;
+  const singleVariant = isSingleVariant ? printProduct.sizes[0] : null;
 
-  const handleAddToCart = async () => {
-    if (!selectedSize) return;
-
+  const handleAddToCart = async (variantId: string) => {
     try {
       setIsAdding(true);
-      await addItem(selectedSize.shopifyVariantId, 1);
-      setOpen(false);
+      await addItem(variantId, 1);
     } catch (error) {
       console.error("Failed to add to cart:", error);
       const errorMessage = error instanceof Error ? error.message : "Failed to add to cart";
@@ -45,6 +44,45 @@ export function BuyPrintButton({ printProduct, imageAlt }: BuyPrintButtonProps) 
     } finally {
       setIsAdding(false);
     }
+  };
+
+  // Single variant: direct add to cart button
+  if (isSingleVariant && singleVariant) {
+    return (
+      <Button
+        variant="outline"
+        size="sm"
+        className="mt-2 w-full"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          handleAddToCart(singleVariant.shopifyVariantId);
+        }}
+        disabled={isAdding}
+      >
+        {isAdding ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Adding...
+          </>
+        ) : (
+          <>
+            <ShoppingCart className="mr-2 h-4 w-4" />
+            Buy Print - C${singleVariant.price.toFixed(2)}
+          </>
+        )}
+      </Button>
+    );
+  }
+
+  // Multiple variants: show dialog with size selection
+  const [open, setOpen] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<PrintSize | null>(printProduct.sizes[0] || null);
+
+  const handleDialogAddToCart = async () => {
+    if (!selectedSize) return;
+    await handleAddToCart(selectedSize.shopifyVariantId);
+    setOpen(false);
   };
 
   return (
@@ -96,7 +134,7 @@ export function BuyPrintButton({ printProduct, imageAlt }: BuyPrintButtonProps) 
             ))}
           </RadioGroup>
           <Button
-            onClick={handleAddToCart}
+            onClick={handleDialogAddToCart}
             disabled={!selectedSize || isAdding}
             className="w-full"
           >
